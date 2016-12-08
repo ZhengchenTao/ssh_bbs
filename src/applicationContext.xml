@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+    default-autowire="byName" default-lazy-init="true">
+    
+    <!-- 说明：下面有的Bean配置提供了多种方案，请根据需要采用某一种（别忘了注释掉其他同类方案） -->
+
+	<!-- 自动扫描Spring注解配置  并保证@Required,@Autowired的属性被注入-->
+	<context:component-scan base-package="com.tao" />
+
+	<!-- 自动加载属性配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+	  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">  
+       <property name="driverClass" value="${jdbc.driverClassName}"/>  
+       <property name="jdbcUrl" value="${jdbc.url}"/>  
+       <property name="user" value="${jdbc.username}"/>  
+       <!-- property池启动时的初始值  -->  
+        <property  name="password" value="${jdbc.password}"/>
+        <!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->    
+        <property name="initialPoolSize">    
+            <value>10</value>    
+        </property>   
+         <!--连接池中保留的最小连接数。-->    
+        <property name="minPoolSize">    
+            <value>5</value>    
+        </property>    
+     
+         <!--连接池中保留的最大连接数。Default: 15 -->    
+        <property name="maxPoolSize">    
+            <value>30</value>    
+        </property> 
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->    
+        <property name="acquireIncrement">    
+            <value>5</value>    
+        </property>   
+    </bean>  
+		
+	<!-- 配置Hibernate的数据源代理工厂：方法一，使用p属性通配符，按文件名搜索匹配的映射文件 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		p:dataSource-ref="dataSource" >
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+			</props>
+		</property>
+		<!-- 加载hibernate的jpa注解形式实体 -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.tao.model*</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory" />
+		
+
+	<!-- 配置声明式事务：方法一，在Service实现类或者public实现方法上使用注解@Transactional，则此类或方法就会启用事务机制 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 下面三个Bean的配置可有可无，但配置后用处更大，通常用于BaseDao类、其他Dao类或特殊工具类中 -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate"
+		p:sessionFactory-ref="sessionFactory" />
+		
+	<bean id="hibernateDaoSupport" class="org.springframework.orm.hibernate4.support.HibernateDaoSupport"
+		p:hibernateTemplate-ref="hibernateTemplate" abstract="true"/>
+		
+	<bean id="sessionFactoryUtils" class="org.springframework.orm.hibernate4.SessionFactoryUtils" abstract="true"/>
+
+</beans>

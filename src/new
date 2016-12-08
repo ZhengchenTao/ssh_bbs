@@ -1,0 +1,85 @@
+创建一个web项目
+先导入hibernate ，spring的jar文件到lib文件下
+添加到buildpath下面 
+创建一个连接数据库的属性文件，代替hibernate.cgf.xml
+名称叫 jdbc.properties
+   jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+   jdbc.url=jdbc:oracle:thin:@localhost:1521:ORCL
+   jdbc.username=yaoss
+   jdbc.password=yaoss
+   hibernate.dialect=org.hibernate.dialect.Oracle9Dialect
+   hibernate.show_sql=true
+   hibernate.format_sql=true
+   hibernate.hbm2ddl.auto=no
+ 创建spring的配置文件 beans.xml
+ （一）因为是基于注解的方式配置所以要加入
+ <context:component-scan base-package="com.dao.*,com.service.*" ></context:component-scan>
+ <context:annotation-config></context:annotation-config>
+  （二）
+  <!-- 导入资源文件 -->
+   <context:property-placeholder 
+   location="classpath:jdbc.properties" />
+  <!-- 配置数据源 -->
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">  
+       <property name="driverClass" value="${jdbc.driverClassName}"/>  
+       <property name="jdbcUrl" value="${jdbc.url}"/>  
+       <property name="user" value="${jdbc.username}"/>  
+       <!-- property池启动时的初始值  -->  
+        <property  name="password" value="${jdbc.password}"/>
+        <!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->    
+        <property name="initialPoolSize">    
+            <value>10</value>    
+        </property>   
+         <!--连接池中保留的最小连接数。-->    
+        <property name="minPoolSize">    
+            <value>5</value>    
+        </property>    
+     
+         <!--连接池中保留的最大连接数。Default: 15 -->    
+        <property name="maxPoolSize">    
+            <value>30</value>    
+        </property> 
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->    
+        <property name="acquireIncrement">    
+            <value>5</value>    
+        </property>   
+    </bean>
+    <!-- 配置hibernate的 sessionFactory实例  通过spring提供的localSessionFactory进行配置-->
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+			</props>
+		</property>
+		<property name="mappingLocations" value="com/yaoss/model/*.hbm.xml"></property>
+	</bean>
+	
+	<!-- 配置事务的管理器 -->
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+     <!-- 配置声明式事务：方法一，在Service实现类或者public实现方法上使用注解@Transactional，则此类或方法就会启用事务机制 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+ 测试spring+hibernate整合成功后，
+ 整合struts框架
+导入struts的jar文件  
+在web.xml文件中配置 
+<!-- struts框架启动 -->
+  <filter>
+    <filter-name>struts2Filter</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>struts2Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+     
