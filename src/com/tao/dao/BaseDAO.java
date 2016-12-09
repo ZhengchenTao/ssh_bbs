@@ -3,6 +3,8 @@ package com.tao.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.criterion.Example;
+
 /**
  * 基础数据库操作类
  * 
@@ -171,4 +173,11 @@ public interface BaseDAO<T> {
 	 */
 	public Integer executeHql(String hql, List<Object> param);
 
+	// 分页
+	public List<T> findByPage(Class<T> c, Integer page, Integer rows);
+
+	// 总数
+	public int getCount(Class<T> c);
+
+	public T find(Class<T> c, T o);
 }
