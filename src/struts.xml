@@ -19,35 +19,8 @@
 	<constant name="struts.objectFactory" value="spring" />
 	<!-- Struts2处理的请求后缀,默认值是action -->
 	<!-- <constant name="struts.action.extension" value="do" /> -->
-	
-	<!-- 国际化资源文件
-	<constant name="struts.custom.i18n.resources" value="globalMessages" />
-	 -->
 
-	
-	<package name="yaoss" extends="struts-default">
-	
-		<default-action-ref name="indexPage" />
-		
-		<global-results>
-			<result name="exceptionPage">/error/exceptionPage.jsp</result>
-		</global-results>
-		
-		<global-exception-mappings>
-			<exception-mapping result="exceptionPage" exception="java.lang.Exception" />
-		</global-exception-mappings>
-		
-		<action name="indexPage">
-			<result>/login.jsp</result>
-		</action>
-<!-- 
-		<action name="login" method="login" class="com.action.LoginAction">
-			<result name="success">/success.jsp</result>
-			<result name="failure">/failure.jsp</result>
-			<result name="error">/login.jsp</result>
-		</action>
- -->		
-	</package>
-
+	<!-- 国际化资源文件 <constant name="struts.custom.i18n.resources" value="globalMessages" 
+		/> -->
 </struts>
 

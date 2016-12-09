@@ -53,7 +53,9 @@ public class ForumsServiceImpl implements ForumsService {
 	}
 
 	@Override
-	public Forums Login(Forums forums) {
-		return baseDAO.find(Forums.class, forums);
+	public Forums find(Forums forums) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }

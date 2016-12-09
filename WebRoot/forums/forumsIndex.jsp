@@ -5,6 +5,13 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String realPath = "http://"
+			+ request.getServerName()
+			+ ":"
+			+ request.getServerPort()
+			+ request.getContextPath()
+			+ request.getServletPath().substring(0,
+					request.getServletPath().lastIndexOf("/") + 1);
 %>
 <!DOCTYPE html>
 <html>
@@ -71,9 +78,10 @@ body {
                 $('#message-content').append('确定退出？');
                 $('#mes').modal('show');
                 $('#model-btn').click(function () {
-                    $.post("/Login/Logout", function (data) {
-                        if (data.state == 'Success') {
-                            location.href = '@url';
+                    $.post("../login/logout", function (data) {
+                    	data = $.parseJSON(data);
+                        if (data.state == 'success') {
+                            location.reload();
                         }
                     });
                 });
@@ -91,7 +99,7 @@ body {
                 var uname = $('#username').val().trim();
                 var upass = $('#userpass').val().trim();
                 var cbox = $('#remember').is(':checked');
-                var logflag = 0
+                var logflag = 0;
                 if (uname == "" || uname == null) {
                     $('#username-group').addClass('has-error');
                     $('#username-group label').removeClass('hidden');
@@ -111,21 +119,19 @@ body {
                     logflag++;
                 }
                 if (logflag == 2) {
-                    $.post("/Login/Login", { username: uname, userpass: upass, remember: cbox }, function (data) {
-                        if (data.state == 'Success') {
-                            location.href = "@url";
-                        }
-                        if (data.state == 'Error') {
-                            $('#Log').modal('hide')
+                    $.post("../login/login", { 'users.username': uname, 'users.password': upass, remember: cbox }, function (data) {
+                    	data = $.parseJSON(data);
+                        if (data.state == 'success') {
+                            $('#Log').modal('hide');
                             $('#message-content').html(null);
                             $('#message-content').append(data.message);
                             $('#mes').modal('show');
                             $('#mes').on('shown.bs.modal');
                             $('#model-btn').click(function () {
-                                location.href = '@url';
-                            })
+                                location.reload();
+                            });
                         }
-                    })
+                    });
                 }
             });
             $('#regsub').click(function () {
@@ -160,8 +166,9 @@ body {
                     regflag++;
                 }
                 if (regflag == 3) {
-                    $.post("/Login/Register", { username: uname, userpass: upass }, function (data) {
-                        if (data.state == 'Success') {
+                    $.post("../login/register", { 'users.username': uname, 'users.password': upass, }, function (data) {
+                    	data = $.parseJSON(data);
+                    	if (data.state == 'succes') {
                             $('#Reg').modal('hide');
                             $('#reg-username').val(null);
                             $('#reg-userpass').val(null);
@@ -175,7 +182,7 @@ body {
                                 $('#Log').modal('show');
                             });
                         }
-                        if (data.state == 'Error') {
+                        if (data.state == 'error') {
                             $('#Reg').modal('hide');
                             $('#message-content').html(null);
                             $('#message-content').append(data.message);
@@ -185,9 +192,9 @@ body {
                                 $('#mes').modal('hide');
                                 $('#Log').modal('show');
                             });
-                        }
+                        };
                     });
-                }
+                };
             });
         });
     </script>
@@ -198,16 +205,17 @@ body {
 			<a href="/Forums/Index" class="navbar-brand">青农论坛</a>
 		</div>
 		<div class="collapse navbar-collapse">
-
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" id="nav-log">登录</a></li>
-			</ul>
-			<!-- 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">@Session["username"]</a></li>
-                    <li><a href="#" id="nav-logout">退出</a></li>
-                </ul>
-            -->
+			<s:if test="#session.username==null">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" id="nav-log">登录</a></li>
+				</ul>
+			</s:if>
+			<s:else>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">${session.username }</a></li>
+					<li><a href="#" id="nav-logout">退出</a></li>
+				</ul>
+			</s:else>
 		</div>
 	</nav>
 	<div class="container body-content">
@@ -254,12 +262,14 @@ body {
 							<div class="form-group" id="username-group">
 								<label class="control-label hidden" for="username">用户名不能为空</label>
 								<input type="text" class="form-control" name="username"
-									id="username" value="@uc" placeholder="用户名" />
+									id="username" value="${cookie.username.value }"
+									placeholder="用户名" />
 							</div>
 							<div class="form-group" id="userpass-group">
 								<label class="control-label hidden" for="username">密码不能为空</label>
 								<input type="password" class="form-control" name="userpass"
-									id="userpass" value="@pc" placeholder="密码" />
+									id="userpass" value="${cookie.password.value }"
+									placeholder="密码" />
 							</div>
 							<div class="checkbox">
 								<label> <input type="checkbox" name="remember"

@@ -3,6 +3,7 @@ package com.tao.service;
 import java.util.List;
 
 import com.tao.model.Forums;
+import com.tao.model.Users;
 
 public interface ForumsService {
 
@@ -20,6 +21,5 @@ public interface ForumsService {
 
 	public int getCount();
 
-	public Forums Login(Forums forums);
-
+	public Forums find(Forums forums);
 }

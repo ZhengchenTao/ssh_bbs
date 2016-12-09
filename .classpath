@@ -84,5 +84,6 @@
 			<attribute name="owner.project.facets" value="jst.web.jstl"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/CodingResource/java/res/struts-2.3.24.1/lib/struts2-json-plugin-2.3.24.1.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

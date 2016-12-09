@@ -218,6 +218,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 		List list = null;
 		Criteria criteria = this.getCurrentSession().createCriteria(c);
 		Example e = Example.create(o);
+		e.excludeZeroes();
 		criteria.add(e);
 		T t = (T) criteria.uniqueResult();
 		return t;
