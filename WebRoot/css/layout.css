@@ -1,0 +1,24 @@
+* {
+	font-family: "Î¢ÈíÑÅºÚ";
+}
+
+body {
+	background-color: #EEEEEE;
+}
+
+.navbar-right {
+	margin-right: 5px;
+}
+
+.navbar-header a {
+	font-size: 30px;
+}
+
+.modal-dialog {
+	padding-top: 120px;
+	width: 350px;
+}
+
+.modal-content {
+	width: 350px;
+}
