@@ -205,8 +205,32 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 	}
 
 	@Override
+	public List<T> findByPage(Class<T> c, Integer page, Integer rows, T o) {
+		Criteria criteria = this.getCurrentSession().createCriteria(c);
+		Example e = Example.create(o);
+		e.excludeZeroes();
+		criteria.add(e);
+		criteria.setFirstResult((page - 1) * rows);
+		criteria.setMaxResults(rows);
+		List<T> list = criteria.list();
+		return list;
+	}
+
+	@Override
 	public int getCount(Class<T> c) {
 		Criteria criteria = this.getCurrentSession().createCriteria(c);
+		ProjectionList pList = Projections.projectionList();
+		criteria.setProjection(Projections.rowCount());
+		Number count = (Number) criteria.uniqueResult();
+		return count.intValue();
+	}
+
+	@Override
+	public int getCount(Class<T> c, T o) {
+		Criteria criteria = this.getCurrentSession().createCriteria(c);
+		Example e = Example.create(o);
+		e.excludeZeroes();
+		criteria.add(e);
 		ProjectionList pList = Projections.projectionList();
 		criteria.setProjection(Projections.rowCount());
 		Number count = (Number) criteria.uniqueResult();

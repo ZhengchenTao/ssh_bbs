@@ -46,11 +46,10 @@ public class BaseAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
-		JSONArray jsonArray = JSONArray.fromObject(map);
+		JSONObject jsonObject = JSONObject.fromObject(map);
 		try {
-			response.getWriter().write(jsonArray.toString());
+			response.getWriter().write(jsonObject.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

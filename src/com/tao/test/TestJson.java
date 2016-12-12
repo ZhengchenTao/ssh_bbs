@@ -1,5 +1,7 @@
 package com.tao.test;
 
+import net.sf.json.JSONObject;
+
 import org.apache.struts2.json.JSONWriter;
 import org.junit.Test;
 
@@ -26,7 +28,7 @@ public class TestJson {
 		System.out.println(j);
 	}
 
-	@Test
+	
 	public void testJson() {
 		Users u = new Users();
 		u.setUsername("abc");
@@ -35,4 +37,5 @@ public class TestJson {
 		j.getAsJsonObject();
 		System.out.println(j);
 	}
+
 }

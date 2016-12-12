@@ -176,8 +176,16 @@ public interface BaseDAO<T> {
 	// 分页
 	public List<T> findByPage(Class<T> c, Integer page, Integer rows);
 
+	// 条件分页
+	public List<T> findByPage(Class<T> c, Integer page, Integer rows, T o);
+
 	// 总数
 	public int getCount(Class<T> c);
 
+	// 条件查询
 	public T find(Class<T> c, T o);
+
+	// 条件总数
+	public int getCount(Class<T> c, T o);
+
 }

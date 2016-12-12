@@ -18,7 +18,6 @@
 <script src="../js/bootstrap.min.js"></script>
 <style>
 .forums {
-	font-family: "微软雅黑";
 	padding-left: 150px;
 	margin-top: 30px;
 }
@@ -53,12 +52,13 @@
 							<!-- <span>@Model.Post.CreateTime</span> <br />
 							 <span>暂无新帖</span>  -->
 						</p>
-						<a href="/PostList/Index?forumsid=@Model.Forums[i].Id"
+						<a href="../posts/index?forumsId=${l.id }"
 							class=" btn btn-default enterforums">点击进入</a>
 					</div>
 				</div>
 			</s:iterator>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tao.dao.BaseDAO;
 import com.tao.model.Forums;
-import com.tao.service.ForumsService;;
+import com.tao.service.ForumsService;
 
-@Transactional// 启用事务机制
+;
+
+@Transactional
+// 启用事务机制
 @Service("ForumsService")
 public class ForumsServiceImpl implements ForumsService {
 	@Resource
@@ -28,7 +31,7 @@ public class ForumsServiceImpl implements ForumsService {
 	}
 
 	@Override
-	public Forums findForumsById(int id) {
+	public Forums findById(int id) {
 		return baseDAO.get(Forums.class, id);
 	}
 
@@ -54,8 +57,7 @@ public class ForumsServiceImpl implements ForumsService {
 
 	@Override
 	public Forums find(Forums forums) {
-		// TODO Auto-generated method stub
-		return null;
+		return baseDAO.find(Forums.class, forums);
 	}
 
 }

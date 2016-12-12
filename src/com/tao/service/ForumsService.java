@@ -11,7 +11,7 @@ public interface ForumsService {
 
 	public void updateForums(Forums forums);
 
-	public Forums findForumsById(int id);
+	public Forums findById(int id);
 
 	public void deleteForums(Forums forums);
 
