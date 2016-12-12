@@ -48,22 +48,22 @@ tbody tr {
 <script>
 	$(function() {
 		$('#rep').click(function() {
-			$.post("/Post/AddReply", {
-				postid : Model.Post.Id,
-				rcontent : $('#rcontent').val()
+			$.post("../posts/addReply", {
+				'replies.post_id' : ${post.id},
+				'replies.content' : $('#rcontent').val()
 			}, function(data) {
-				if (data == 'success') {
-					location.href = '/Post/ShowPost?postid=@Model.Post.Id';
+				data = $.parseJSON(data);
+				if (data.state == 'success') {
+					location.reload();
 				}
-				if (data == 'log') {
+				if (data.state == 'error') {
 					$('#Log').modal('show');
 					$('#Log').on('shown.bs.modal');
 				}
-				data;
-			})
+			});
 		});
 		$('#back').click(function() {
-			location.href = "@ViewBag.url";
+			self.location=document.referrer;
 		});
 	});
 </script>

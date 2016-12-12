@@ -28,4 +28,6 @@ public interface PostsService {
 	public int getCount(int forumsId);
 
 	public List<Posts> findByPage(int page, int rows, int forumsId);
+
+	public void clickPost(int id);
 }

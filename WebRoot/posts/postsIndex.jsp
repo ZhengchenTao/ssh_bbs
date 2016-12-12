@@ -53,7 +53,7 @@
 						<a href="../posts/addPost?forumsId=${forums.id }"
 							class="btn btn-primary pull-right" style="font-size: 20px;">&nbsp;&nbsp;发帖&nbsp;&nbsp;</a>
 						<p>
-							帖子数量：<span>@Model.CurrentForums[0].Post.Count</span>
+							帖子数量：<span>${pocount }</span>
 						</p>
 						<p>
 							版主：<span>XXX</span>

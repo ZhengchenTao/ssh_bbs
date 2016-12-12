@@ -42,6 +42,8 @@ public class PostsAction extends BaseAction {
 	private int rows = 9;
 	private int forumsId;
 	private Posts posts;
+	private Replies replies;
+
 	private int postId;
 
 	@Action(value = "index", results = { @Result(name = "success", location = "/posts/postsIndex.jsp") })
@@ -60,8 +62,10 @@ public class PostsAction extends BaseAction {
 		}
 		ActionContext ac = ActionContext.getContext();
 		List<Posts> postlist = postsService.findByPage(page, rows, forumsId);
+		int pocount = postsService.getCount(forumsId);
 		List<Forums> forumslist = forumsService.findAllList();
 		Forums forums = forumsService.findById(forumsId);
+		ac.put("pocount", pocount);
 		ac.put("forums", forums);
 		ac.put("folist", forumslist);
 		ac.put("polist", postlist);
@@ -107,8 +111,13 @@ public class PostsAction extends BaseAction {
 			@Result(name = "success", location = "/posts/checkPost.jsp"),
 			@Result(name = "error", location = "/error.jsp") })
 	public String checkPost() {
+		if (postId == 0) {
+			return ERROR;
+		}
 		Posts po = postsService.findById(postId);
 		if (po != null) {
+			postsService.clickPost(postId);
+			po = postsService.findById(postId);
 			Forums fo = forumsService.findById(po.getForums_id());
 			Users us = usersService.findUsersById(po.getUsers_id());
 			List<Replies> re = repliesService.findByPosts(po.getId());
@@ -122,6 +131,20 @@ public class PostsAction extends BaseAction {
 			return SUCCESS;
 		} else {
 			return ERROR;
+		}
+	}
+
+	@Action(value = "addReply", results = { @Result(type = "json") })
+	public void addReply() {
+		ActionContext ac = ActionContext.getContext();
+		if (ac.getSession().get("userid") == null) {
+			this.write("error", "");
+		} else {
+			int uid = (int) ac.getSession().get("userid");
+			replies.setUsers_id(uid);
+			replies.setReplyTime(new Date());
+			repliesService.saveReplies(replies);
+			this.write("success", "");
 		}
 	}
 
@@ -163,5 +186,13 @@ public class PostsAction extends BaseAction {
 
 	public void setPostId(int postId) {
 		this.postId = postId;
+	}
+
+	public Replies getReplies() {
+		return replies;
+	}
+
+	public void setReplies(Replies replies) {
+		this.replies = replies;
 	}
 }

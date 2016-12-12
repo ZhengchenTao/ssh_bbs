@@ -79,4 +79,12 @@ public class PostsServiceImpl implements PostsService {
 		return baseDAO.find("from Posts where forums_id=" + forumsId);
 	}
 
+	@Override
+	public void clickPost(int id) {
+		Posts po = this.findById(id);
+		int clickNum = po.getClickNum();
+		clickNum++;
+		po.setClickNum(clickNum);
+		baseDAO.saveOrUpdate(po);
+	}
 }
