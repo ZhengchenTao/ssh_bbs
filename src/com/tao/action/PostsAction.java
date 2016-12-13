@@ -62,6 +62,7 @@ public class PostsAction extends BaseAction {
 			page = cpage;
 		}
 		ActionContext ac = ActionContext.getContext();
+		
 		List<Posts> postlist = postsService.findByPage(page, rows, forumsId);
 		int pocount = postsService.getCount(forumsId);
 		List<Forums> forumslist = forumsService.findAllList();

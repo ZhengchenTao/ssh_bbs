@@ -67,7 +67,6 @@
 							'posts.content' : content
 						}, function(data) {
 							data = $.parseJSON(data);
-							alert(data.state);
 							if (data.state == 'success') {
 								location.href = '../posts/checkPost?postId='
 										+ data.pid;

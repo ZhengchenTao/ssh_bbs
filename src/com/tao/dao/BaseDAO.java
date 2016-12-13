@@ -188,4 +188,7 @@ public interface BaseDAO<T> {
 	// 条件总数
 	public int getCount(Class<T> c, T o);
 
+	// 条件分页倒序
+	public List<T> findByPageDesc(Class<T> c, Integer page, Integer rows, T o);
+
 }

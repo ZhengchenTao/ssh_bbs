@@ -54,7 +54,7 @@ public class PostsServiceImpl implements PostsService {
 	public List<Posts> findByPage(int page, int rows, int forumsId) {
 		Posts p = new Posts();
 		p.setForums_id(forumsId);
-		return baseDAO.findByPage(Posts.class, page, rows, p);
+		return baseDAO.findByPageDesc(Posts.class, page, rows, p);
 	}
 
 	@Override

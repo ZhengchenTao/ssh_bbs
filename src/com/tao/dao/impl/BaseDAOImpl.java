@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,6 +211,19 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 		Example e = Example.create(o);
 		e.excludeZeroes();
 		criteria.add(e);
+		criteria.setFirstResult((page - 1) * rows);
+		criteria.setMaxResults(rows);
+		List<T> list = criteria.list();
+		return list;
+	}
+
+	@Override
+	public List<T> findByPageDesc(Class<T> c, Integer page, Integer rows, T o) {
+		Criteria criteria = this.getCurrentSession().createCriteria(c);
+		Example e = Example.create(o);
+		e.excludeZeroes();
+		criteria.add(e);
+		criteria.addOrder(Order.desc("id"));
 		criteria.setFirstResult((page - 1) * rows);
 		criteria.setMaxResults(rows);
 		List<T> list = criteria.list();
