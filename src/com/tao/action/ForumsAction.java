@@ -1,6 +1,8 @@
 package com.tao.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,6 +18,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tao.model.Forums;
 import com.tao.service.ForumsService;
+import com.tao.service.PostsService;
 
 @Controller
 @ParentPackage("struts-default")
@@ -24,6 +27,8 @@ import com.tao.service.ForumsService;
 public class ForumsAction extends ActionSupport {
 	@Resource
 	private ForumsService forumsService;
+	@Resource
+	private PostsService postsService;
 	private Forums forums;
 
 	@Action(value = "index", results = { @Result(name = "success", location = "/forums/forumsIndex.jsp") })
@@ -31,6 +36,13 @@ public class ForumsAction extends ActionSupport {
 		List<Forums> list = forumsService.findAllList();
 		ActionContext ac = ActionContext.getContext();
 		ac.put("list", list);
+		Map<Integer, Integer> pocount = new HashMap();
+		for (int i = 0; i < list.size(); i++) {
+			int forumsId = list.get(i).getId();
+			int count = postsService.getCount(forumsId);
+			pocount.put(forumsId, count);
+		}
+		ac.put("count", pocount);
 		return SUCCESS;
 	}
 

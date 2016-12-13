@@ -44,13 +44,12 @@
 					<h3 class="forums-title">${l.title}</h3>
 					<div class="forums-content">
 						<p>
-							帖子数:<span>123</span>
-						</p>
-						<p>
-							<span><a href="/Post/ShowPost?postid=@Model.Post.Id">@Model.Post.Title</a></span>
-							<span><a href="">username</a></span> <br /> <span>Post.CreateTime</span>
-							<!-- <span>@Model.Post.CreateTime</span> <br />
-							 <span>暂无新帖</span>  -->
+							帖子数:
+							<s:iterator value="#count" var="key">
+								<s:if test="key==#l.id">
+									<span>${value }</span>
+								</s:if>
+							</s:iterator>
 						</p>
 						<a href="../posts/index?forumsId=${l.id }"
 							class=" btn btn-default enterforums">点击进入</a>

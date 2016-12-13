@@ -69,7 +69,6 @@
 							<th style="width: 500px;">帖子标题</th>
 							<th>作者</th>
 							<th style="width: 100px;">查看/回复</th>
-							<th>最后发表</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -87,9 +86,6 @@
 											<span><s:property value="value" /></span>
 										</s:if>
 									</s:iterator></td>
-								<!-- <td><a href=""><span id="pcheckname">@lastrep.Users.username</span></a>&nbsp;<span>@string.Format("{0:f}",
-										lastrep.ReplyTime)</span></td>-->
-								<td>暂无回复</td>
 							</tr>
 						</s:iterator>
 					</tbody>
