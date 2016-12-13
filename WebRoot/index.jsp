@@ -54,7 +54,7 @@
 			<h4>厚德、博学、笃行、致远</h4>
 			<hr style="width: 700px;" />
 			<a href="forums/index" class="btn btn-default pagebtn">点击进入</a> <a
-				href="admin/ShowLogin" class="btn btn-default pagebtn">进入管理系统</a>
+				href="admin/login" class="btn btn-default pagebtn">进入管理系统</a>
 		</div>
 	</div>
 </body>
