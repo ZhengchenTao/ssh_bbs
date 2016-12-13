@@ -36,13 +36,12 @@ public class LoginAction extends BaseAction {
 				.get(org.apache.struts2.StrutsStatics.HTTP_RESPONSE);
 		if (us != null) {
 			if (remember == true) {
-				System.out.println(remember);
 				Cookie unCookie = new Cookie("username", us.getUsername());
 				Cookie pwCookie = new Cookie("password", us.getPassword());
 				unCookie.setPath("/");
 				pwCookie.setPath("/");
-				unCookie.setMaxAge(60 * 60 * 24 * 30);
-				pwCookie.setMaxAge(60 * 60 * 24 * 30);
+				unCookie.setMaxAge(30);
+				pwCookie.setMaxAge(30);
 				response.addCookie(unCookie);
 				response.addCookie(pwCookie);
 			}
@@ -50,7 +49,7 @@ public class LoginAction extends BaseAction {
 			ac.getSession().put("username", us.getUsername());
 			this.write("success", "登录成功");
 		} else {
-			this.write("error", "登录失败 请检查用户名密码");
+			this.write("success", "登录失败 请检查用户名密码");
 		}
 	}
 

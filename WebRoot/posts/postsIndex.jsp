@@ -76,8 +76,17 @@
 						<s:iterator value="#polist" var="pl">
 							<tr>
 								<td><a href="../posts/checkPost?postId=${pl.id }">${pl.title }</a></td>
-								<td><a href="">@post.Users.username</a></td>
-								<td><span id="pcheck">${pl.clickNum }</span>/<span>@check</span></td>
+								<td><s:iterator value="#uslist" var="ul">
+										<s:if test="#ul.id==#pl.users_id">
+											<a href=""><s:property value="#ul.username" /></a>
+										</s:if>
+									</s:iterator></td>
+								<td><span id="pcheck">${pl.clickNum }</span>/ <s:iterator
+										value="#replist" var="key">
+										<s:if test="key==#pl.id">
+											<span><s:property value="value" /></span>
+										</s:if>
+									</s:iterator></td>
 								<!-- <td><a href=""><span id="pcheckname">@lastrep.Users.username</span></a>&nbsp;<span>@string.Format("{0:f}",
 										lastrep.ReplyTime)</span></td>-->
 								<td>暂无回复</td>

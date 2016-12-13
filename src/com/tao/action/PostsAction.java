@@ -1,5 +1,6 @@
 package com.tao.action;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -65,6 +66,20 @@ public class PostsAction extends BaseAction {
 		int pocount = postsService.getCount(forumsId);
 		List<Forums> forumslist = forumsService.findAllList();
 		Forums forums = forumsService.findById(forumsId);
+		List<Users> uslist = usersService.findAllList();
+		Map<Integer, Integer> replist = new HashMap();
+		for (int i = 0; i < postlist.size(); i++) {
+			int pid = postlist.get(i).getId();
+			int recount = repliesService.findByPosts(pid).size();
+			replist.put(pid, recount);
+		}
+		/*
+		 * for (Integer key : replist.keySet()) { Object value =
+		 * replist.get(key); System.out.println("Key = " + key + ", Value = " +
+		 * value); }
+		 */
+		ac.put("replist", replist);
+		ac.put("uslist", uslist);
 		ac.put("pocount", pocount);
 		ac.put("forums", forums);
 		ac.put("folist", forumslist);
