@@ -11,7 +11,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>青农论坛</title>
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

@@ -9,9 +9,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<base href="<%=basePath%>">
 
-<title>My JSP 'index.jsp' starting page</title>
+<title>青农论坛后台管理</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -21,9 +20,9 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <script>
 	$(function() {
 		$('#left-nav-home').addClass('active');
@@ -33,6 +32,7 @@
 
 <body>
 	<jsp:include page="../layout/adminLayout.jsp" />
+	<h3 style="text-align:center">欢迎使用</h3>
 	</div>
 	</div>
 	</div>

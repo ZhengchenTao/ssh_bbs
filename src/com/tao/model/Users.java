@@ -20,8 +20,8 @@ public class Users implements java.io.Serializable {
 	@Column(name = "password")
 	private String password;
 
-	@Column(name = "regtime")
-	private Date regtime;
+	@Column(name = "regTime")
+	private Date regTime;
 
 	@Column(name = "role")
 	private int role;
@@ -50,12 +50,12 @@ public class Users implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public Date getRegtime() {
-		return regtime;
+	public Date getRegTime() {
+		return regTime;
 	}
 
-	public void setRegtime(Date regtime) {
-		this.regtime = regtime;
+	public void setRegTime(Date regTime) {
+		this.regTime = regTime;
 	}
 
 	public int getRole() {

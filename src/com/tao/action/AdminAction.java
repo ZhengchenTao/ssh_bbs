@@ -40,8 +40,8 @@ public class AdminAction extends BaseAction {
 		users = usersService.Login(users);
 		if (users != null) {
 			ActionContext ac = ActionContext.getContext();
-			ac.getSession().put("userid", users.getId());
-			ac.getSession().put("username", users.getUsername());
+			ac.getSession().put("adminid", users.getId());
+			ac.getSession().put("admin", users.getUsername());
 			this.write("success", "");
 		} else {
 			this.write("error", "用户名不正确或没有权限");

@@ -9,7 +9,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<base href="<%=basePath%>">
 
 <title>My JSP 'login.jsp' starting page</title>
 
@@ -18,9 +17,9 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <style type="text/css">
 * {
 	font-family: "微软雅黑";
@@ -69,13 +68,13 @@ body {
 				logflag++;
 			}
 			if (logflag == 2) {
-				$.post("admin/doLogin", {
+				$.post("../admin/doLogin", {
 					'users.username' : uname,
 					'users.password' : upass
 				}, function(data) {
 					data = $.parseJSON(data);
 					if (data.state == 'success') {
-						location.href = "admin/index";
+						location.href = "../admin/index";
 					}
 					if (data.state == 'error') {
 						$('#message-content').html(null);

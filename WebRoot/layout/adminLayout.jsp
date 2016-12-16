@@ -107,12 +107,12 @@ body {
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">青农论坛后台管理</a>
+			<a class="navbar-brand" href="">青农论坛后台管理</a>
 		</div>
 		<ul class="nav navbar-nav navbar-right">
 			<li>
 				<p class="navbar-text">
-					你好,管理员<span>@Session["admin"]</span>
+					你好,管理员<span>${session.admin }</span>
 				</p>
 			</li>
 			<li><a href="#" id="logout">退出系统</a></li>
@@ -127,16 +127,16 @@ body {
 			<div class="left-nav">
 				<ul class="nav nav-pills nav-stacked">
 					<li role="presentation" id="left-nav-home"><a
-						href="/Admin/Index"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;首页</a>
+						href="../admin/index"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;首页</a>
 					</li>
 					<li role="presentation" id="left-nav-user"><a
-						href="/Admin/UserManage"><span
+						href="../admin/usersIndex"><span
 							class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
 					<li role="presentation" id="left-nav-forum"><a
-						href="/Admin/ForumManage"><span
+						href="../admin/forumsIndex"><span
 							class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;板块管理</a></li>
 					<li role="presentation" id="left-nav-post"><a
-						href="/Admin/PostManage"><span
+						href="../admin/postsIndex"><span
 							class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;帖子管理</a></li>
 				</ul>
 			</div>

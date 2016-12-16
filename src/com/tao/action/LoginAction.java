@@ -67,7 +67,7 @@ public class LoginAction extends BaseAction {
 		us.setUsername(users.getUsername());
 		us = usersService.find(us);
 		if (us == null) {
-			users.setRegtime(new Date());
+			users.setRegTime(new Date());
 			usersService.saveUsers(users);
 			this.write("success", "注册成功");
 		} else {
