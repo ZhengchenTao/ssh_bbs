@@ -105,7 +105,7 @@ $(function() {
 				'users.password' : upass,
 			}, function(data) {
 				data = $.parseJSON(data);
-				if (data.state == 'succes') {
+				if (data.state == 'success') {
 					$('#Reg').modal('hide');
 					$('#reg-username').val(null);
 					$('#reg-userpass').val(null);
