@@ -139,39 +139,39 @@
 				</tr>
 			</thead>
 			<tbody>
-				<s:iterator value="#userslist" var="ul">
+				<s:iterator value="#list" var="l">
 					<tr>
-						<td>${ul.id}</td>
-						<td><span class="show_${ul.id }" id="uname_${ul.id }">${ul.username }</span>
+						<td>${l.id}</td>
+						<td><span class="show_${l.id }" id="uname_${l.id }">${l.username }</span>
 							<input type="text"
-							class="form-control hidden input-sm edit_${ul.id }"
-							id="username_${ul.id }" value="${ul.username }" /></td>
-						<td><span class="show_${ul.id }" id="upass_${ul.id }">${ul.password }</span>
+							class="form-control hidden input-sm edit_${l.id }"
+							id="username_${l.id }" value="${l.username }" /></td>
+						<td><span class="show_${l.id }" id="upass_${l.id }">${l.password }</span>
 							<input type="text"
-							class="form-control hidden input-sm edit_${ul.id }"
-							id="userpass_${ul.id }" value="${ul.password }" /></td>
-						<td><span class="show_${ul.id }" id="urole_${ul.id }"
-							att="${ul.role}"> <s:if test="#ul.role==1">
+							class="form-control hidden input-sm edit_${l.id }"
+							id="userpass_${l.id }" value="${l.password }" /></td>
+						<td><span class="show_${l.id }" id="urole_${l.id }"
+							att="${l.role}"> <s:if test="#ul.role==1">
 							管理员
 							</s:if> <s:else>
 							普通用户
 							</s:else>
-						</span> <select class="form-control hidden input-sm edit_${ul.id }"
-							id="role_${ul.id }">
+						</span> <select class="form-control hidden input-sm edit_${l.id }"
+							id="role_${l.id }">
 								<option value="0">普通用户</option>
 								<option value="1">管理员</option>
 						</select></td>
-						<td><span id="regtime_${ul.id }">${ul.regTime }</span></td>
+						<td><span id="regtime_${l.id }">${l.regTime }</span></td>
 						<td>
-							<div class="show_${ul.id }">
+							<div class="show_${l.id }">
 								<a href="#"><span class="glyphicon glyphicon-cog"
-									att="${ul.id }"></span></a>&nbsp;&nbsp; <a href="#"><span
-									class="glyphicon glyphicon-trash" att="${ul.id }"></span></a>
+									att="${l.id }"></span></a>&nbsp;&nbsp; <a href="#"><span
+									class="glyphicon glyphicon-trash" att="${l.id }"></span></a>
 							</div>
-							<div class="hidden edit_${ul.id }">
+							<div class="hidden edit_${l.id }">
 								<a href="#"><span class="glyphicon glyphicon-ok"
-									att="${ul.id }"></span></a>&nbsp;&nbsp; <a href="#"><span
-									class="glyphicon glyphicon-remove" att="${ul.id }"></span></a>
+									att="${l.id }"></span></a>&nbsp;&nbsp; <a href="#"><span
+									class="glyphicon glyphicon-remove" att="${l.id }"></span></a>
 							</div>
 						</td>
 					</tr>

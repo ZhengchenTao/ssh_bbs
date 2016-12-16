@@ -20,7 +20,7 @@ import com.tao.service.UsersService;
 @ParentPackage("json-default")
 @Namespace(value = "/admin")
 @ExceptionMappings({ @ExceptionMapping(exception = "java.lange.RuntimeException", result = "error") })
-public class UsersManage extends BaseAction {
+public class UsersManageAction extends BaseAction {
 	@Resource
 	private UsersService usersService;
 	private Users users;
@@ -43,7 +43,7 @@ public class UsersManage extends BaseAction {
 		}
 		List<Users> usersList = usersService.findByPage(page, rows);
 		ActionContext ac = ActionContext.getContext();
-		ac.put("userslist", usersList);
+		ac.put("list", usersList);
 		ac.put("page", page);
 		ac.put("cpage", cpage);
 		return SUCCESS;
