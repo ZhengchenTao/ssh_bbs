@@ -106,7 +106,7 @@ body {
 							id="userpass" value="" placeholder="密码" />
 					</div>
 					<input type="button" class="btn btn-primary" style="width: 100%;"
-						value="登录" id="logsub" /> <a href="/Home/Index"
+						value="登录" id="logsub" /> <a href="../index"
 						class="btn btn-default" style="width: 100%;margin-top:20px">返回首页</a>
 				</form>
 			</div>

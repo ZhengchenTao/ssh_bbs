@@ -48,6 +48,14 @@ public class AdminAction extends BaseAction {
 		}
 	}
 
+	@Action(value = "logout", results = { @Result(type = "json") })
+	public void logout() {
+		ActionContext ac = ActionContext.getContext();
+		ac.getSession().remove("adminid");
+		ac.getSession().remove("admin");
+		this.write("success", "退出成功");
+	}
+
 	public Users getUsers() {
 		return users;
 	}

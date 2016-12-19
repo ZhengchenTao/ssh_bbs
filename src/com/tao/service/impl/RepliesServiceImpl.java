@@ -39,6 +39,15 @@ public class RepliesServiceImpl implements RepliesService {
 	}
 
 	@Override
+	public void deleteRepliesByPosts(int postsId) {
+		List<Replies> list = baseDAO.find("from Replies where post_id="
+				+ postsId);
+		for (Replies replies : list) {
+			baseDAO.delete(replies);
+		}
+	}
+
+	@Override
 	public List<Replies> findAllList() {
 		return baseDAO.find("from Replies");
 	}

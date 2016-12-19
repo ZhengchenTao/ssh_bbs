@@ -47,7 +47,7 @@ public class PostsServiceImpl implements PostsService {
 
 	@Override
 	public List<Posts> findByPage(int page, int rows) {
-		return baseDAO.findByPage(Posts.class, page, rows);
+		return baseDAO.findByPageDesc(Posts.class, page, rows);
 	}
 
 	@Override

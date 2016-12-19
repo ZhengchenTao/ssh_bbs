@@ -27,4 +27,6 @@ public interface RepliesService {
 	public int getCount(int postsId);
 
 	public List<Replies> findByPage(int page, int rows, int postsId);
+
+	public void deleteRepliesByPosts(int postsId);
 }

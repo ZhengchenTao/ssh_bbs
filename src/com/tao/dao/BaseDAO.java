@@ -191,4 +191,6 @@ public interface BaseDAO<T> {
 	// 条件分页倒序
 	public List<T> findByPageDesc(Class<T> c, Integer page, Integer rows, T o);
 
+	// 分页倒序
+	public List<T> findByPageDesc(Class<T> c, Integer page, Integer rows);
 }

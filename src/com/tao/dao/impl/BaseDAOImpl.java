@@ -231,6 +231,16 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 	}
 
 	@Override
+	public List<T> findByPageDesc(Class<T> c, Integer page, Integer rows) {
+		Criteria criteria = this.getCurrentSession().createCriteria(c);
+		criteria.addOrder(Order.desc("id"));
+		criteria.setFirstResult((page - 1) * rows);
+		criteria.setMaxResults(rows);
+		List<T> list = criteria.list();
+		return list;
+	}
+
+	@Override
 	public int getCount(Class<T> c) {
 		Criteria criteria = this.getCurrentSession().createCriteria(c);
 		ProjectionList pList = Projections.projectionList();

@@ -43,12 +43,13 @@ body {
 			$('#message-content').append('确认退出？');
 			$('#mes').modal('show');
 			$('#model-btn').click(function() {
-				$.post("/Admin/AdminLogout", function(data) {
+				$.post("../admin/logout", function(data) {
+					data = $.parseJSON(data);
 					$('#message-content2').html(null);
 					$('#message-content2').append(data.message);
 					$('#mes2').modal('show');
 					$('#model-btn2').click(function() {
-						location.href = '/Home/Index';
+						location.href = '../index';
 					});
 				});
 			});
