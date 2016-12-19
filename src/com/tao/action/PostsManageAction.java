@@ -75,7 +75,6 @@ public class PostsManageAction extends BaseAction {
 
 	@Action(value = "postsDelete", results = { @Result(type = "json") })
 	public void delete() {
-		System.out.println(posts.getId());
 		repliesService.deleteRepliesByPosts(posts.getId());
 		postsService.deletePosts(posts);
 		this.write("success", "删除成功");

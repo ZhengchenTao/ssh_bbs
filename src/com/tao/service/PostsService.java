@@ -30,4 +30,6 @@ public interface PostsService {
 	public List<Posts> findByPage(int page, int rows, int forumsId);
 
 	public void clickPost(int id);
+
+	public void deletePostsByForums(int id);
 }

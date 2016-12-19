@@ -23,19 +23,6 @@
 <script>
 	$(function() {
 		var edit = 0;
-		$('#left-nav-post').addClass("active");
-		$('.glyphicon-cog').click(function() {
-			if (edit == 0) {
-				var eid = $(this).attr('att');
-				$('.show_' + eid + '').addClass('hidden');
-				$('.edit_' + eid + '').removeClass('hidden');
-				edit = 1;
-			} else {
-				$('#message-content').html(null);
-				$('#message-content').append('请先完成当前编辑');
-				$('#mes').modal('show');
-			}
-		});
 		$('.glyphicon-trash').click(function() {
 			var eid = $(this).attr('att');
 			$('#message-content').html(null);
@@ -124,14 +111,8 @@
 							</s:iterator></td>
 						<td>
 							<div class="show_${l.id}">
-								<a href="#"><span class="glyphicon glyphicon-cog"
-									att="${l.id}"></span></a>&nbsp;&nbsp; <a href="#"><span
+								</a>&nbsp;&nbsp; <a href="#"><span
 									class="glyphicon glyphicon-trash" att="${l.id}"></span></a>
-							</div>
-							<div class="hidden edit_${l.id}">
-								<a href="#"><span class="glyphicon glyphicon-ok"
-									att="${l.id}"></span></a>&nbsp;&nbsp; <a href="#"><span
-									class="glyphicon glyphicon-remove" att="${l.id}"></span></a>
 							</div>
 						</td>
 					</tr>

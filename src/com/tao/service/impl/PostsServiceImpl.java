@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tao.dao.BaseDAO;
 import com.tao.model.Posts;
+import com.tao.model.Replies;
 import com.tao.service.PostsService;
 
 ;
@@ -86,5 +87,14 @@ public class PostsServiceImpl implements PostsService {
 		clickNum++;
 		po.setClickNum(clickNum);
 		baseDAO.saveOrUpdate(po);
+	}
+
+	@Override
+	public void deletePostsByForums(int fourmsId) {
+		List<Posts> list = baseDAO.find("from Posts where forums_id="
+				+ fourmsId);
+		for (Posts posts : list) {
+			baseDAO.delete(posts);
+		}
 	}
 }

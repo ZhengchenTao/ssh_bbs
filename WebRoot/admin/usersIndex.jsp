@@ -151,7 +151,7 @@
 							class="form-control hidden input-sm edit_${l.id }"
 							id="userpass_${l.id }" value="${l.password }" /></td>
 						<td><span class="show_${l.id }" id="urole_${l.id }"
-							att="${l.role}"> <s:if test="#ul.role==1">
+							att="${l.role}"> <s:if test="#l.role==1">
 							管理员
 							</s:if> <s:else>
 							普通用户

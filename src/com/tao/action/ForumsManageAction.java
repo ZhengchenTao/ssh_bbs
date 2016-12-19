@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.tao.model.Forums;
 import com.tao.service.ForumsService;
+import com.tao.service.PostsService;
 
 @Controller
 @ParentPackage("json-default")
@@ -23,6 +24,8 @@ import com.tao.service.ForumsService;
 public class ForumsManageAction extends BaseAction {
 	@Resource
 	private ForumsService forumsService;
+	@Resource
+	private PostsService postsService;
 	private Forums forums;
 	private int page = 1;
 	private int rows = 9;
@@ -48,33 +51,42 @@ public class ForumsManageAction extends BaseAction {
 		ac.put("cpage", cpage);
 		return SUCCESS;
 	}
+
 	@Action(value = "forumsUpdate", results = { @Result(type = "json") })
 	public void update() {
 		forumsService.updateForums(forums);
-		this.write("success","修改成功");
+		this.write("success", "修改成功");
 	}
+
 	@Action(value = "forumsDelete", results = { @Result(type = "json") })
 	public void delete() {
+		postsService.deletePostsByForums(forums.getId());
 		forumsService.deleteForums(forums);
-		this.write("success","删除成功");
+		this.write("success", "删除成功");
 	}
+
 	@Action(value = "forumsAdd", results = { @Result(type = "json") })
 	public void add() {
 		forumsService.saveForums(forums);
-		this.write("success","添加成功");
+		this.write("success", "添加成功");
 	}
+
 	public int getPage() {
 		return page;
 	}
+
 	public void setPage(int page) {
 		this.page = page;
 	}
+
 	public int getRows() {
 		return rows;
 	}
+
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
+
 	public Forums getForums() {
 		return forums;
 	}
